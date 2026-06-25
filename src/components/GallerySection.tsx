@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { CaretLeft, CaretRight, X } from "@phosphor-icons/react";
-import { galleryImages, imagePlaceholders } from "../data/content";
+import { galleryImages } from "../data/content";
 import { Reveal } from "./Reveal";
 
 /* ─── Mosaic tile sizing ─── */
@@ -206,16 +206,7 @@ export function GallerySection() {
           </Reveal>
         ))}
 
-        {imagePlaceholders.map((slot, i) => (
-          <Reveal key={slot.id} delay={(galleryImages.length + i) * 0.03}>
-            <div
-              className="placeholder-slot flex h-full w-full flex-col items-center justify-center rounded-xl p-3"
-            >
-              <span className="mb-1 text-[9px] uppercase tracking-wider text-flame/60">À ajouter</span>
-              <span className="text-center text-[10px] text-ink-muted">{slot.label}</span>
-            </div>
-          </Reveal>
-        ))}
+  
       </div>
 
       {/* Lightbox */}

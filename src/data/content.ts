@@ -202,7 +202,7 @@ export const moments = [
     year: "1968",
     title: "La révélation de la batterie rouge",
     text: "Los Commandos, El Rego, James Brown. Le jeune Sagbohan devient le batteur le plus convoité de Cotonou.",
-    image: "/images/batterie rouge.jpeg",
+    image: "/images/Sagbohan sur batterie.jpeg",
   },
   {
     year: "1977",
@@ -260,6 +260,22 @@ export const galleryImages = [
   { src: "/images/sagbohan vodoun days.jpeg", alt: "Sagbohan Danialou aux Vodun Days", caption: "Vodun Days" },
   { src: "/images/zemihin et batterie rouge.jpg", alt: "Sagbohan Danialou, portrait intimiste au micro", caption: "Session Zémihin" },
   { src: "/images/deuil de djibril.jpg", alt: "Djibril Sagbohan, portrait", caption: "Djibril Sagbohan" },
+  { src: "/images/concert 1.jpeg", alt: "Sagbohan au concert", caption: "Concert" },
+  { src: "/images/concert paris.jpeg", alt: "Concert à Paris", caption: "Concert à Paris" },
+  { src: "/images/concert sagbohan.jpeg", alt: "Concert Sagbohan Danialou", caption: "Concert Sagbohan Danialou" },
+  { src: "/images/Crisba X Sagbohan.jpeg", alt: "Crisba X Sagbohan", caption: "Crisba X Sagbohan" },
+  { src: "/images/Daniel Sagbohan.jpeg", alt: "Daniel Sagbohan", caption: "Daniel Sagbohan" },
+  { src: "/images/Sagbbohan au concert.jpeg", alt: "Sagbohan au concert", caption: "Sagbohan au concert" },
+  { src: "/images/Sagbhohan X zeynab.jpeg", alt: "Sagbohan X zeynab", caption: "Sagbohan X zeynab" },
+  { src: "/images/Sagbohan sur batterie.jpeg", alt: "Sagbohan sur batterie", caption: "Sagbohan sur batterie" },
+  { src: "/images/SagbohanXbeni.jpeg", alt: "Sagbohan et Béni Tossou", caption: "Sagbohan et Béni Tossou" },
+  { src: "/images/Sagbohan X tohon.jpeg", alt: "Sagbohan et Tohon", caption: "Sagbohan et Tohon" },
+  { src: "/images/Sagbohan X fanicko.jpeg", alt: "Sagbohan et Fanicko", caption: "Sagbohan et Fanicko" },
+  { src: "/images/Sagbohan et pepe.jpeg", alt: "Sagbohan et Pépé Oléka", caption: "Sagbohan et Pépé Oléka" },
+  { src: "/images/sagbohan dans Agbada.jpeg", alt: "Sagbohan dans Agbada", caption: "Sagbohan dans Agbada" },
+  { src: "/images/sagbohan en coulisse.jpeg", alt: "Sagbohan en coulisses", caption: "Sagbohan en coulisses" },
+  { src: "/images/sagbohan concert tamtam.jpeg", alt: "Sagbohan au concert", caption: "Sagbohan au concert" },
+  { src: "/images/Sagbohan sur tam tam.jpeg", alt: "Sagbohan au concert", caption: "Sagbohan au concert" },
 ];
 
 export const imagePlaceholders = [
@@ -313,6 +329,16 @@ export const sources = [
     title: "Wikimedia Commons",
     publisher: "Commons",
     url: "https://commons.wikimedia.org/wiki/Category:Sagbohan_Danialou",
+  },
+  {
+    title: "Flickr",
+    publisher: "Flickr Presidence du Bénin",
+    url: "https://www.flickr.com/photos/presidencebenin/albums/72157720147650230/with/51645079681",
+  },
+  {
+    title: "News Cotonou",
+    publisher: "News a Cotonou",
+    url: "http://news.acotonou.com/photos/album.asp?id=5174",
   },
 ];
 
