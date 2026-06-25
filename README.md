@@ -1,4 +1,4 @@
-# #celebronSagbohan
+# #CelebronSagbohan
 
 Hommage mobile-first à Sagbohan Danialou, légende vivante de la musique béninoise.
 

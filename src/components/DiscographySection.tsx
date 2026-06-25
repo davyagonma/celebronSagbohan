@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { CaretDown, Disc } from "@phosphor-icons/react";
+import { CaretDown, Disc, Play, X } from "@phosphor-icons/react";
 import { albums, singles, topSongs } from "../data/content";
 import { Reveal } from "./Reveal";
 
 export function DiscographySection() {
   const [openAlbum, setOpenAlbum] = useState<number | null>(0);
+  const [embedSrc, setEmbedSrc] = useState<string | null>(null);
+
+  const openEmbed = (url: string) => {
+    setEmbedSrc(url);
+  };
 
   return (
     <section id="discographie" className="px-4 py-16 sm:px-6 lg:mx-auto lg:max-w-lg lg:px-8">
@@ -16,6 +21,33 @@ export function DiscographySection() {
           11 releases, 8 albums, 50+ titres instructifs. Données compilées depuis Discogs, Wikipédia et L'investigateur.
         </p>
       </Reveal>
+
+      {/* Inline player */}
+      {embedSrc && (
+        <div className="sticky top-12 z-40 mt-4 overflow-hidden rounded-xl border border-flame/30 bg-stage-deep stage-glow">
+          <div className="flex items-center justify-between border-b border-white/8 px-4 py-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-gold">Lecture en cours</span>
+            <button
+              type="button"
+              onClick={() => setEmbedSrc(null)}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-ink hover:bg-white/20 active:scale-95"
+              aria-label="Fermer le lecteur"
+            >
+              <X size={14} weight="bold" />
+            </button>
+          </div>
+          <div className="aspect-video w-full bg-stage-black">
+            <iframe
+              src={embedSrc}
+              title="Lecteur audio"
+              className="h-full w-full"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              style={{ border: 0 }}
+            />
+          </div>
+        </div>
+      )}
 
       <div className="mt-8 space-y-3">
         {albums.map((album, i) => (
@@ -45,11 +77,28 @@ export function DiscographySection() {
               </button>
               {openAlbum === i && (
                 <ul className="border-t border-white/5 px-4 pb-4 pt-2">
-                  {album.tracks.map((track) => (
-                    <li key={track} className="border-b border-white/5 py-2 text-sm text-ink-muted last:border-0">
-                      {track}
-                    </li>
-                  ))}
+                  {album.tracks.map((track) => {
+                    const t = typeof track === "string" ? { title: track } : track;
+                    const hasEmbed = "embedUrl" in t && (t as { embedUrl?: string }).embedUrl;
+                    return (
+                      <li
+                        key={t.title}
+                        className="flex items-center gap-2 border-b border-white/5 py-2 last:border-0"
+                      >
+                        {hasEmbed ? (
+                          <button
+                            type="button"
+                            onClick={() => openEmbed((t as { embedUrl: string }).embedUrl)}
+                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-flame/20 text-flame transition-colors hover:bg-flame/40 active:scale-95"
+                            aria-label={`Écouter ${t.title}`}
+                          >
+                            <Play size={14} weight="fill" />
+                          </button>
+                        ) : null}
+                        <span className="text-sm text-ink-muted">{t.title}</span>
+                      </li>
+                    );
+                  })}
                   {album.note && (
                     <li className="pt-2 text-xs italic text-gold/80">{album.note}</li>
                   )}
@@ -61,7 +110,7 @@ export function DiscographySection() {
       </div>
 
       <Reveal>
-        <h3 className="mt-12 text-xl font-bold text-white">Singles & EP</h3>
+        <h3 className="mt-12 text-xl font-bold text-white">Singles &amp; EP</h3>
         <ul className="mt-4 space-y-2">
           {singles.map((s) => (
             <li key={s.title} className="flex justify-between gap-3 rounded-lg bg-white/5 px-4 py-3 text-sm">
@@ -86,6 +135,7 @@ export function DiscographySection() {
           ))}
         </div>
       </Reveal>
+
     </section>
   );
 }

@@ -114,7 +114,7 @@ export function ImageLightbox({ item, onClose }: ImageLightboxProps) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={reduce ? undefined : { opacity: 0, y: 24, scale: 0.98 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-flame/30 bg-stage-deep stage-glow"
+        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-flame/30 stage-glow"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -126,27 +126,24 @@ export function ImageLightbox({ item, onClose }: ImageLightboxProps) {
           ×
         </button>
 
-        <div className="photo-frame aspect-[4/5] max-h-[55dvh] w-full sm:aspect-[16/10] sm:max-h-[50dvh]">
+        {/* Image fills entire card, text overlays bottom */}
+        <div className="relative max-h-[80dvh] w-full">
           <img
             src={item.src}
             alt={item.alt}
-            className="absolute inset-0 h-full w-full object-contain object-center"
+            className="block w-full max-h-[80dvh] object-contain"
+            style={{ background: "var(--color-stage-deep)" }}
           />
-          <div
-            className="photo-spotlight pointer-events-none absolute inset-0 opacity-40"
-            style={{ "--spot-x": "50%", "--spot-y": "40%" } as Record<string, string>}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-stage-black/60 via-transparent to-flame/10" />
-        </div>
-
-        <div className="border-t border-white/8 p-5 sm:p-6">
-          {item.year && (
-            <span className="text-xs font-bold uppercase tracking-wider text-gold">{item.year}</span>
-          )}
-          <h3 className="mt-1 text-xl font-bold text-white">{item.title}</h3>
-          {(item.text || item.caption) && (
-            <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.text ?? item.caption}</p>
-          )}
+          {/* Text overlay at bottom */}
+          <div className="absolute inset-x-0 bottom-0 z-[5] bg-gradient-to-t from-stage-black/90 via-stage-black/60 to-transparent px-5 pb-5 pt-14 sm:px-6 sm:pb-6 sm:pt-20">
+            {item.year && (
+              <span className="text-xs font-bold uppercase tracking-wider text-gold">{item.year}</span>
+            )}
+            <h3 className="mt-1 text-lg font-bold text-white drop-shadow-lg sm:text-xl">{item.title}</h3>
+            {(item.text || item.caption) && (
+              <p className="mt-2 text-sm leading-relaxed text-ink/90 drop-shadow-md line-clamp-3">{item.text ?? item.caption}</p>
+            )}
+          </div>
         </div>
       </motion.div>
     </motion.div>

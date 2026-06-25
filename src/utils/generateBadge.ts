@@ -132,7 +132,7 @@ export async function generateBadgeCanvas(
   const contentW = w - pad * 2;
 
   // Badge hashtag pill
-  const hashtag = "#celebronSagbohan";
+  const hashtag = "#CelebronSagbohan";
   ctx.font = "800 44px Outfit, system-ui, sans-serif";
   const tagW = ctx.measureText(hashtag).width + 56;
   const tagH = 72;

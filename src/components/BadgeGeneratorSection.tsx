@@ -74,7 +74,7 @@ export function BadgeGeneratorSection() {
     setGenerating(true);
     try {
       const canvas = await generateBadgeCanvas(photoUrl, activePhrase, format);
-      downloadCanvas(canvas, `celebronSagbohan-${Date.now()}.png`);
+      downloadCanvas(canvas, `CelebronSagbohan-${Date.now()}.png`);
     } catch {
       setError("Échec du téléchargement. Réessayez.");
     } finally {
@@ -94,12 +94,51 @@ export function BadgeGeneratorSection() {
           </div>
           <p className="mt-3 max-w-prose text-sm leading-relaxed text-ink-muted">
             Ajoute ta photo, choisis une phrase forte et télécharge ton badge{" "}
-            <span className="font-semibold text-gold">#celebronSagbohan</span> pour les réseaux sociaux.
+            <span className="font-semibold text-gold">#CelebronSagbohan</span> pour les réseaux sociaux.
           </p>
         </Reveal>
 
         <Reveal>
           <div className="mt-8 space-y-5">
+            {/* Preview – shown above controls */}
+            {photoUrl && (
+              <motion.div
+                initial={reduce ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="overflow-hidden rounded-2xl border border-gold/25 bg-stage-deep stage-glow"
+              >
+                <div className="flex items-center gap-2 border-b border-white/8 px-4 py-3">
+                  <ImageSquare size={18} className="text-gold" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-ink-muted">Aperçu</span>
+                  {generating && (
+                    <span className="ml-auto text-[10px] text-flame">Génération…</span>
+                  )}
+                </div>
+                <div className="flex justify-center bg-stage-black p-4">
+                  <canvas
+                    ref={previewRef}
+                    className={`max-h-[420px] w-full object-contain ${
+                      format === "story" ? "max-w-[220px]" : "max-w-[320px]"
+                    }`}
+                  />
+                </div>
+                <div className="border-t border-white/8 p-4">
+                  <button
+                    type="button"
+                    disabled={generating || !activePhrase}
+                    onClick={handleDownload}
+                    className="stage-glow flex w-full items-center justify-center gap-2 rounded-full bg-flame py-3.5 text-sm font-bold text-white disabled:opacity-50 active:scale-[0.98]"
+                  >
+                    <DownloadSimple size={20} weight="bold" />
+                    Télécharger mon badge
+                  </button>
+                  <p className="mt-2 text-center text-[10px] text-smoke">
+                    Partage sur Instagram, Facebook, WhatsApp avec #CelebronSagbohan
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
             {/* Upload */}
             <input
               ref={fileRef}
@@ -114,7 +153,7 @@ export function BadgeGeneratorSection() {
               className="flex w-full flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-flame/40 bg-flame/5 px-6 py-10 transition-colors hover:border-flame/60 active:scale-[0.99]"
             >
               <UploadSimple size={36} className="text-flame" />
-              <span className="text-sm font-bold text-white">Choisir ma photo</span>
+              <span className="text-sm font-bold text-white">{photoUrl ? "Changer ma photo" : "Choisir ma photo"}</span>
               <span className="text-xs text-ink-muted">JPG, PNG ou WebP · max {MAX_FILE_MB} Mo</span>
             </button>
 
@@ -179,45 +218,6 @@ export function BadgeGeneratorSection() {
                 />
               </label>
             </div>
-
-            {/* Preview */}
-            {photoUrl && (
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="overflow-hidden rounded-2xl border border-gold/25 bg-stage-deep stage-glow"
-              >
-                <div className="flex items-center gap-2 border-b border-white/8 px-4 py-3">
-                  <ImageSquare size={18} className="text-gold" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-ink-muted">Aperçu</span>
-                  {generating && (
-                    <span className="ml-auto text-[10px] text-flame">Génération…</span>
-                  )}
-                </div>
-                <div className="flex justify-center bg-stage-black p-4">
-                  <canvas
-                    ref={previewRef}
-                    className={`max-h-[420px] w-full object-contain ${
-                      format === "story" ? "max-w-[220px]" : "max-w-[320px]"
-                    }`}
-                  />
-                </div>
-                <div className="border-t border-white/8 p-4">
-                  <button
-                    type="button"
-                    disabled={generating || !activePhrase}
-                    onClick={handleDownload}
-                    className="stage-glow flex w-full items-center justify-center gap-2 rounded-full bg-flame py-3.5 text-sm font-bold text-white disabled:opacity-50 active:scale-[0.98]"
-                  >
-                    <DownloadSimple size={20} weight="bold" />
-                    Télécharger mon badge
-                  </button>
-                  <p className="mt-2 text-center text-[10px] text-smoke">
-                    Partage sur Instagram, Facebook, WhatsApp avec #celebronSagbohan
-                  </p>
-                </div>
-              </motion.div>
-            )}
           </div>
         </Reveal>
       </div>
