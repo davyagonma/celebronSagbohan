@@ -40,7 +40,7 @@ function GalleryLightbox({
 }) {
   const reduce = useReducedMotion();
   const total = images.length;
-  const current = images[currentIndex];
+  // const current = images[currentIndex];
 
   const goPrev = useCallback(() => {
     onNavigate((currentIndex - 1 + total) % total);
