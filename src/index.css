@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-stage-black: #0a0604;
+  --color-stage-deep: #120c08;
+  --color-stage-warm: #1a1008;
+  --color-flame: #e65100;
+  --color-gold: #ffb300;
+  --color-gold-soft: #ffc947;
+  --color-ember: #bf360c;
+  --color-smoke: #8d6e63;
+  --color-mist: #bcaaa4;
+  --color-ink: #f5ebe0;
+  --color-ink-muted: #a89888;
+  --font-display: "Outfit", system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/outfit@latest/latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/outfit@latest/latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/outfit@latest/latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-stage-black);
+}
+
+body {
+  font-family: var(--font-display);
+  background: var(--color-stage-black);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-flame) 40%, transparent);
+  color: white;
+}
+
+.spotlight-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgb(230 81 0 / 0.35), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgb(255 179 0 / 0.12), transparent 50%),
+    linear-gradient(180deg, var(--color-stage-deep) 0%, var(--color-stage-black) 100%);
+}
+
+.stage-glow {
+  box-shadow:
+    0 0 60px rgb(230 81 0 / 0.25),
+    0 0 120px rgb(255 179 0 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.image-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+    0 24px 48px rgb(0 0 0 / 0.5),
+    0 0 40px rgb(230 81 0 / 0.15);
+}
+
+.photo-frame {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  border-radius: inherit;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+    0 16px 40px rgb(0 0 0 / 0.45),
+    0 0 32px rgb(230 81 0 / 0.12);
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.photo-frame:hover,
+.photo-frame:focus-visible {
+  border-color: rgb(255 179 0 / 0.35);
+  box-shadow:
+    0 20px 50px rgb(0 0 0 / 0.5),
+    0 0 60px rgb(230 81 0 / 0.35),
+    0 0 100px rgb(255 179 0 / 0.12);
+}
+
+.photo-spotlight {
+  background: radial-gradient(
+    circle at var(--spot-x) var(--spot-y),
+    rgb(255 179 0 / 0.45) 0%,
+    rgb(230 81 0 / 0.18) 28%,
+    transparent 62%
+  );
+}
+
+.image-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgb(10 6 4 / 0.85) 100%);
+  pointer-events: none;
+}
+
+.placeholder-slot {
+  background:
+    linear-gradient(135deg, rgb(26 16 8 / 0.9), rgb(10 6 4 / 0.95)),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgb(230 81 0 / 0.04) 8px,
+      rgb(230 81 0 / 0.04) 16px
+    );
+  border: 2px dashed rgb(230 81 0 / 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
